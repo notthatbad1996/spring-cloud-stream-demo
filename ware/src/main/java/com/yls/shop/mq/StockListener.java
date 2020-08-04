@@ -21,6 +21,7 @@ public class StockListener {
 
     /**
      * 接收来自订单服务的库存解锁消息，查询订单实时状态之后才解锁
+     * --为了避免网络延迟导致库存解锁失败，所以订单关闭时会给库存服务发送库存解锁消息
      */
     @StreamListener(value = StockSink.STOCK_RELEASE_DELAY_INPUT,
             condition = "headers['orderTimeOut']==true")

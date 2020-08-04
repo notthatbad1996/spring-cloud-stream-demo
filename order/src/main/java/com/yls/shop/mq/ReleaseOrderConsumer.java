@@ -33,7 +33,7 @@ public class ReleaseOrderConsumer {
         // 手动ack
         channel.basicAck(deliveryTag, false);
 
-        //
+        //--为了避免网络延迟导致库存解锁失败，所以订单关闭时会给库存服务发送库存解锁消息
         StockTo stockTo = new StockTo();
         stockTo.setLockNum(5);
         stockTo.setOrderId(payload.getOrderId());
